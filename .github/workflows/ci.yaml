@@ -29,10 +29,10 @@ jobs:
       - name: Deploy Application
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /home/ec2-user/AWS_repo
+            cd /home/ec2-user/AWS_repo/cmd
             pkill -f ./myapp
             git pull origin main
-            go build -o myapp cmd/main.go
+            go build -o myapp main.go
             nohup ./myapp > myapp.log 2>&1 &
           EOF
         shell: bash
