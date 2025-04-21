@@ -15,7 +15,9 @@ WORKDIR /app
 ## we run go build to compile the binary
 ## executable of our Go program
 # Builds the application as a staticly linked one, to allow it to run on alpine
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o main .
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o main ./cmd
+
 ## Our start command which kicks off
 ## our newly created binary executable
 CMD ["/app/main"]
