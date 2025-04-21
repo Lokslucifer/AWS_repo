@@ -3,7 +3,7 @@ name: Deploy to Server via SSH
 on:
   push:
     branches:
-      - master  # or 'master'
+      - main  # or 'master'
 
 jobs:
   deploy:
@@ -29,10 +29,10 @@ jobs:
       - name: Deploy Application
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /home/ubuntu/simple-gin-app
+            cd /home/ec2-user/AWS_repo
             pkill -f ./myapp
             git pull origin main
-            go build -o myapp main.go
+            go build -o myapp cmd/main.go
             nohup ./myapp > myapp.log 2>&1 &
           EOF
         shell: bash
